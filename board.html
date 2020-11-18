@@ -33,11 +33,37 @@
         </table>
     </body>
     <script>
+        function onLoad() {
+            gen_board();
+            resetBoard();
+            drawPieces();
+        }
+
+        // These are the ascii numbers for the chars
+        boardPieces = {
+            R:  82, N:  78, B: 66, Q:  81, K:  75, P:  80,
+            r: 114, n: 110, b: 98, q: 113, k: 107, p: 112,
+            e: 0
+        };
         uni_pieces = {
             'R':'♜', 'N':'♞', 'B':'♝', 'Q':'♛', 'K':'♚', 'P':'♟',
             'r':'♖', 'n':'♘', 'b':'♗', 'q':'♕', 'k':'♔', 'p':'♙',
             'e':''
         };
+
+        xxx = new Map();
+        xxx.set(boardPieces.R, 'R');
+        xxx.set(boardPieces.B, 'B');
+        xxx.set(boardPieces.N, 'N');
+        xxx.set(boardPieces.Q, 'Q');
+        xxx.set(boardPieces.K, 'K');
+        xxx.set(boardPieces.P, 'P');
+        xxx.set(boardPieces.r, 'r');
+        xxx.set(boardPieces.n, 'n');
+        xxx.set(boardPieces.b, 'b');
+        xxx.set(boardPieces.q, 'q');
+        xxx.set(boardPieces.k, 'k');
+        xxx.set(boardPieces.p, 'p');
 
         const revMap = [];
         revMap['♜'] = 'R';
@@ -52,6 +78,23 @@
         revMap['♕'] = 'q';
         revMap['♔'] = 'k';
         revMap['♙'] = 'p';
-    </script>
+
+        function pieceAtUI(c, r) {
+            if ((r<1) || (r>8)) return '';
+            if ((c<1) || (c>8)) return '';
+            const id = 'r'+ r + 'c' + c;
+            let p = undefined;
+            const el = document.getElementById(id);
+            if (el) { 
+                p = revMap[el.childNodes[0].wholeText];
+            }
+            return p ? p : '';
+        }
+
+        function movePieceUI() {
+
+        }
+</script>
     <script src="./board.js"></script>
+    <script src="./move.js"></script>
 </html>
