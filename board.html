@@ -1,0 +1,57 @@
+<html>
+    <style>
+        body * {
+            outline: 0px solid green;
+        }
+        table {
+            font-size: xxx-large;
+            text-align: center;
+            vertical-align: middle;
+            table-layout: fixed;
+        }
+        table td {
+            height: 64px;
+            width: 64px;
+            padding: 0em;
+        }
+        .black-cell {
+            outline: 0px;
+            background: burlywood;
+        }
+        .white-cell {
+            outline: 0px;
+            background: whitesmoke;
+        }
+    </style>
+    <body onload="onLoad()">
+        <table id = "the-table">
+            <tr>
+                <th></th>
+                <th>A</th><th>B</th><th>C</th><th>D</th>
+                <th>E</th><th>F</th><th>G</th><th>H</th>
+            </tr>
+        </table>
+    </body>
+    <script>
+        uni_pieces = {
+            'R':'♜', 'N':'♞', 'B':'♝', 'Q':'♛', 'K':'♚', 'P':'♟',
+            'r':'♖', 'n':'♘', 'b':'♗', 'q':'♕', 'k':'♔', 'p':'♙',
+            'e':''
+        };
+
+        const revMap = [];
+        revMap['♜'] = 'R';
+        revMap['♞'] = 'N';
+        revMap['♝'] = 'B';
+        revMap['♛'] = 'Q';
+        revMap['♚'] = 'K';
+        revMap['♟'] = 'P';
+        revMap['♖'] = 'r';
+        revMap['♘'] = 'n';
+        revMap['♗'] = 'b';
+        revMap['♕'] = 'q';
+        revMap['♔'] = 'k';
+        revMap['♙'] = 'p';
+    </script>
+    <script src="./board.js"></script>
+</html>
