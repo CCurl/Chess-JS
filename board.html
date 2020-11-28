@@ -37,6 +37,7 @@
             gen_board();
             resetBoard();
             drawPieces();
+            onmessage({ action: 'think', fen: startPos });
         }
 
         // These are the ascii numbers for the chars
@@ -97,4 +98,5 @@
 </script>
     <script src="./board.js"></script>
     <script src="./move.js"></script>
+    <script src="./stockfish.js"></script>
 </html>
