@@ -1,12 +1,14 @@
-self.addEventListener('message', function(e) {
-    onWorkerMessage(e.data);
-  }, false);
+self.addEventListener('message', (e) => { onWorkerMessage(e.data); }, false);
 
 var state = 0;
 var bestMove = 'e2e4';
 var score = 2.3;
 var count = 1;
 var timer = undefined;
+
+function setPosition(fen) {
+    self.postMessage('setPos: ' + fen);
+}
 
 function doOne() {
     count += 1;
@@ -29,7 +31,7 @@ function think() {
     }
     if (state === 1) {
         doSome();
-        timer = setTimeout(() => { think(); }, 1000);
+        timer = setTimeout(() => { think(); }, 50);
     }
 }
 
@@ -38,9 +40,13 @@ function onWorkerMessage(msg) {
         case 'start':
             self.postMessage('ready');
             break;
+        case 'setPosition':
+            setPosition(msg.fen);
+            break;
         case 'think':
             self.postMessage('thinking ...');
             state = 1;
+            count = 1;
             think();
             break;
         case 'stop':
@@ -48,7 +54,7 @@ function onWorkerMessage(msg) {
             self.postMessage('stopped, ' + count + ' nodes');
             break;
         case 'quit':
-            self.postMessage('WORKER STOPPED: ' + msg.msg + '. (buttons will no longer work)');
+            self.postMessage('worker terminated, (buttons will no longer work)');
             self.close(); // Terminates the worker.
             break;
         default:

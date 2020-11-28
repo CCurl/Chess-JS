@@ -1,6 +1,8 @@
 <button onclick="think()">Think</button>
 <button onclick="stop()">Stop Thinking</button>
 <button onclick="quit()">Quit</button>
+<button onclick="setPos()">Set Position</button>
+
 <output id="result"></output>
 
 <script>
@@ -15,6 +17,10 @@
 
   function quit() {
     worker.postMessage({'cmd': 'quit', 'msg': ''});
+  }
+
+  function setPos() {
+    worker.postMessage({'cmd': 'setPosition', 'fen': 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w 0 0'});
   }
 
   var worker = new Worker('ww.js');
